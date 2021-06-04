@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from example_interfaces.srv import AddTwoInts
+
+
+def  main(args=None):
+    rclpy.init(args=args)
+    node = Node("add_two_ints_no_oop")
+    client = node.create_client(AddTwoInts, "add_two_ints")
+    while not client.wait_for_service(5): # Here 5 sec is time for wait if not given it will wait forever
+        node.get_logger().warn("waiting for server at AddTwoInts")
+    
+    request = AddTwoInts.Request()
+    request.a = 3
+    request.b = 7
+
+    future = client.call_async(request)
+    rclpy.spin_until_future_complete(node, future)
+
+    try:
+        response = future.result()
+        node.get_logger().info(f"{str(request.a)} + {str(request.b)} = {response.sum}")
+    except Exception as e:
+        node.get_logger().error("Servce call Failed %e" %(e,))
+
+    rclpy.shutdown()
+
+
+
+if __name__ == "__main__":
+    main()
