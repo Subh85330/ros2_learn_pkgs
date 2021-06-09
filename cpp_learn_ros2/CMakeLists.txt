@@ -16,13 +16,17 @@ find_package(rclcpp REQUIRED)
 
 
 # for new programe
-add_executable(cpp_node src/publisher_1.cpp)
+add_executable(cpp_node src/simple_node.cpp)
 ament_target_dependencies(cpp_node rclcpp)
+
+add_executable(cpp_node_oop src/simple_node_oop1.cpp)
+ament_target_dependencies(cpp_node_oop rclcpp)
 
 
 # install node
 install(TARGETS
    cpp_node
+   cpp_node_oop
    DESTINATION  lib/${PROJECT_NAME}
 )
 
