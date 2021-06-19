@@ -27,11 +27,15 @@ ament_target_dependencies(cpp_node_oop rclcpp)
 add_executable(robot_news_publisher src/robot_news_publisher.cpp)
 ament_target_dependencies(robot_news_publisher rclcpp example_interfaces)
 
+add_executable(robot_news_subscriber src/robot_news_subscriber.cpp)
+ament_target_dependencies(robot_news_subscriber rclcpp example_interfaces)
+
 # install node
 install(TARGETS
    cpp_node
    cpp_node_oop
    robot_news_publisher
+   robot_news_subscriber
    DESTINATION  lib/${PROJECT_NAME}
 )
 
