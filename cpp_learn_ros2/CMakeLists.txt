@@ -30,12 +30,16 @@ ament_target_dependencies(robot_news_publisher rclcpp example_interfaces)
 add_executable(robot_news_subscriber src/robot_news_subscriber.cpp)
 ament_target_dependencies(robot_news_subscriber rclcpp example_interfaces)
 
+add_executable(add_2_ints_srv_server src/add_2_ints_srv_server.cpp)
+ament_target_dependencies(add_2_ints_srv_server rclcpp example_interfaces)
+
 # install node
 install(TARGETS
    cpp_node
    cpp_node_oop
    robot_news_publisher
    robot_news_subscriber
+   add_2_ints_srv_server
    DESTINATION  lib/${PROJECT_NAME}
 )
 
